@@ -35,41 +35,57 @@ def attendance(studentNames):
     > N/A
 '''
 def managingSignups(familyCount):
-    print("------------------------------------------------------")
+    # Variables
+    unique = [] # Make empty list to keep track of unique parents
+    tempName = "" # Temporary parent name holder
+    largest = 0 # Init largest kids number
+    parent = "" # Init parent 'tuple'
+    totalKids = 0 # Counter for kid amounts
 
-    
-    totalKids = 0
-    totalParents = 0
-
-    # Make empty list to keep track of unique parents
-    unique = []
-    tempName = ""
-    largest = 0
-    parent = ""
+    # For loop to iterate through tuple list
     for i in range(len(familyCount)):
         
+        # Comparative values
         tempName = familyCount[i][0]
         largest = familyCount[i][1]
 
+        # For loop to find unique parents
         for j in range(len(familyCount)):
+            # Leave loop if we're looking at the same index
             if (j==i):
                 break
-            elif (familyCount[i][0] == familyCount[j][0]):
 
-                if (familyCount[j][1] > familyCount[i][1]):
+            # If current parent has the same name as the parent we're comparing to
+            elif (familyCount[j][0] == tempName):
+
+                # AND if parent's number of kids is greater than the initial stored value
+                if (familyCount[j][1] > largest):
                     largest = familyCount[j][1]
-                else:
-                    largest = familyCount[i][1]
 
+            # Create tuple of parent name and number of kids
             parent = tempName, largest
 
         # Add parent + largest kid amount to unique list
-        unique.append(parent)
+        if parent:
+            unique.append(parent)
 
-    totalKids = sum(unique[1])  # Total number of kids
+    # For loop to sum up number of kids
+    for family in unique:
+        totalKids = totalKids + family[1]
+            
     totalParents = len(unique)  # Total number of parents
     print("Total parents signed up: ", totalParents, "\nTotal kids attending: ", totalKids)
 
+
+
+'''
+> Automate tracking of the performance of students
+> Input:
+    > Dictionary scores -- Dictionary of student names and their corresponding quiz scores
+> Returns:
+    > N/A
+'''
+def performance(scores):
 
 
 
@@ -81,9 +97,18 @@ def main():
     studentNames = ["Alice", "Bob", "Charlie", "Alice", "Bob"]
     attendance(studentNames)
 
+    print("---------------------------------------------------------------------------------")
+
     # Question 2
     parents = [("John", 2), ("Jane", 3), ("John", 4), ("Alice", 1)]
     managingSignups(parents)
+
+    print("---------------------------------------------------------------------------------")
+
+    # Question 3
+
+
+
 
 if __name__ == "__main__":
     main()
