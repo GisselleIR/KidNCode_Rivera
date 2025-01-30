@@ -86,6 +86,34 @@ def managingSignups(familyCount):
     > N/A
 '''
 def performance(scores):
+    # Variables
+    studentAverage = 0
+    classAverage = 0
+    topScore = 0
+    topStudent = ""
+
+    for name, quizScores in scores.items():
+
+        # Find average score of current student
+        studentAverage = round(sum(quizScores)/len(quizScores), 2)
+        # Check if current average is greater than the top score
+        if (studentAverage > topScore):
+            # Set current average as the new top score
+            topScore = studentAverage
+            topStudent = name
+
+        # Add current average to the total class score sum
+        classAverage = classAverage + studentAverage
+
+        # Print student's scores
+        print(name, "'s average score: ", studentAverage)
+
+    # Find class average and print value
+    classAverage = round(classAverage / len(scores), 2)
+    print("\nClass average: ", classAverage)
+
+    # Print Top student
+    print("Top-performing student: ", topStudent, " with an average score of ", topScore)
 
 
 
@@ -106,7 +134,12 @@ def main():
     print("---------------------------------------------------------------------------------")
 
     # Question 3
-
+    scores = {
+        "Alice": [85, 90, 78],
+        "Bob": [70, 75, 80],
+        "Charlie": [95, 88, 92]
+        }
+    performance(scores)
 
 
 
